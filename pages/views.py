@@ -1,16 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 
 
 def home_view(request):
-    return render(request, 'home.html', { 'name': 'Hung'})
+    context = {
+        'name': 'Hung', 
+        'skills': ['html', 'css', 'django'],
+        'content': '<div class="alert alert-primary" role="alert">Hello Django</div>'
+    }
+    return render(request, 'home.html', context)
 
 
 def contact_view(request):
-    return HttpResponse('<h1>Contact</h1>')
+    return render(request, 'contact.html')
 
 
 def about_view(request):
-    return HttpResponse('<h1>About</h1>')
+    return render(request, 'about.html')

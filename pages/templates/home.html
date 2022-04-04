@@ -1,6 +1,17 @@
-{% if name %}
-<h1>Hello, {{name}}!</h1>
-{% else %}
-<h1>Hello, World!</h1>
-{% endif %}
-<p>This is a fucking home page</p>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Hello, {{ name|capfirst|default:' World!' }}!</h1>
+    <p>My skills: </p>
+    <ul>
+        {% for skill in skills %}
+        {% if skill == 'django' %}
+        <li>{{ forloop.counter }} - {{ skill|capfirst|add:' Python' }}</li>
+        {% else %}
+        <li>{{ forloop.counter }} - {{ skill|capfirst }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    {{ content|safe }}
+{% endblock %}
