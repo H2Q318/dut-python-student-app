@@ -6,4 +6,4 @@ class Student(models.Model):
     name = models.TextField(max_length=255)
     address = models.TextField()
     age = models.IntegerField(default=20)
-    gender = models.BooleanField()
+    gender = models.BooleanField(default=True)
