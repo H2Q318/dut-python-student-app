@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student
+from .models import Department, Student
 
 class StudentForm(forms.ModelForm):
     code = forms.CharField(
@@ -35,7 +35,16 @@ class StudentForm(forms.ModelForm):
             'code',
             'name',
             'address',
+            'email',
+            'department',
         ]
+        
+    def __init__(self, *args, **kwargs):
+        super(StudentForm, self).__init__(*args, **kwargs)
+        
+        departmentObjs = Department.objects.all()
+        departments = ((i.id, i.name) for i in departmentObjs)
+        self.fields['department'].choices = departments
         
     def clean_code(self, *args, **kwargs):
         code = self.cleaned_data.get('code')
