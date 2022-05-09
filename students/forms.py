@@ -39,13 +39,6 @@ class StudentForm(forms.ModelForm):
             'department',
         ]
         
-    def __init__(self, *args, **kwargs):
-        super(StudentForm, self).__init__(*args, **kwargs)
-        
-        departmentObjs = Department.objects.all()
-        departments = ((i.id, i.name) for i in departmentObjs)
-        self.fields['department'].choices = departments
-        
     def clean_code(self, *args, **kwargs):
         code = self.cleaned_data.get('code')
         if not code.isnumeric():

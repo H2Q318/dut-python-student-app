@@ -81,9 +81,15 @@ def detail_view(request, id):
 
 
 def list_view(request):
-    students = Student.objects.all()
+    keyword = request.GET.get('keyword')
+    
+    if keyword:
+        students = Student.objects.filter(code__icontains=keyword)
+    else:
+        students = Student.objects.all()
     
     context = {
-        'students': students
+        'keyword': keyword,
+        'students': students.order_by('code')
     }
     return render(request, 'list.html', context)
